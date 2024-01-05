@@ -19,8 +19,8 @@ INSERT INTO entries (
 `
 
 type CreateEntryParams struct {
-	AccountID int64
-	Amount    int64
+	AccountID int64 `json:"account_id"`
+	Amount    int64 `json:"amount"`
 }
 
 func (q *Queries) CreateEntry(ctx context.Context, arg CreateEntryParams) (Entry, error) {
@@ -69,8 +69,8 @@ LIMIT $1 OFFSET $2
 `
 
 type ListEntriesParams struct {
-	Limit  int64
-	Offset int64
+	Limit  int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 }
 
 func (q *Queries) ListEntries(ctx context.Context, arg ListEntriesParams) ([]Entry, error) {
@@ -79,7 +79,7 @@ func (q *Queries) ListEntries(ctx context.Context, arg ListEntriesParams) ([]Ent
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Entry
+	items := []Entry{}
 	for rows.Next() {
 		var i Entry
 		if err := rows.Scan(
@@ -106,8 +106,8 @@ RETURNING id, account_id, amount, created_at
 `
 
 type UpdateEntryParams struct {
-	ID     int64
-	Amount int64
+	ID     int64 `json:"id"`
+	Amount int64 `json:"amount"`
 }
 
 func (q *Queries) UpdateEntry(ctx context.Context, arg UpdateEntryParams) (Entry, error) {
