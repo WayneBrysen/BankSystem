@@ -10,11 +10,18 @@ jobs:
     name: Build image
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::851725526893:user/github-ci
+        role-to-assume: arn:aws:iam::851725526893:role/GithubAction
         aws-region: ap-southeast-2
 
     - name: Login to Amazon ECR
