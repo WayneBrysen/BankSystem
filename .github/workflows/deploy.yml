@@ -43,11 +43,11 @@ jobs:
         REPOSITORY: simplebank
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REPOSITORY:latest .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
     - name: Update image to Amazon EKS
-      run: aws eks update-kubeconfig --name simple-bank -region ap-southeast-2
+      run: aws eks update-kubeconfig --name simple-bank --region ap-southeast-2
 
     - name: Deploy image to Amazon EKS
       run: |
