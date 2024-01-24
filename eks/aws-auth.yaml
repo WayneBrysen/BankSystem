@@ -9,10 +9,3 @@ data:
         username: github-ci
         groups:
           - system:masters
-
-    mapRoles: |
-      - groups:
-        - system:bootstrappers
-        - system:nodes
-        rolearn: arn:aws:iam::851725526893:role/GithubAction
-        username: system:node:{{EC2PrivateDNSName}}
