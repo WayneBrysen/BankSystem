@@ -33,7 +33,7 @@ type CreateSessionParams struct {
 	UserAgent    string             `json:"user_agent"`
 	ClientIp     string             `json:"client_ip"`
 	IsBlocked    bool               `json:"is_blocked"`
-	ExpiresAt    time.Time 			`json:"expires_at"`
+	ExpiresAt    time.Time `json:"expires_at"`
 }
 
 func (q *Queries) CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error) {
